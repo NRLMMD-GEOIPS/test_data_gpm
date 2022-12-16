@@ -3,84 +3,73 @@
     # # # Author:
     # # # Naval Research Laboratory, Marine Meteorology Division
     # # # 
-    # # # This program is free software:
-    # # # you can redistribute it and/or modify it under the terms
-    # # # of the NRLMMD License included with this program.
-    # # # 
-    # # # If you did not receive the license, see
+    # # # This program is free software: you can redistribute it and/or modify it under
+    # # # the terms of the NRLMMD License included with this program. This program is
+    # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+    # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+    # # # for more details. If you did not receive the license, for more information see:
     # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
-    # # # for more information.
-    # # # 
-    # # # This program is distributed WITHOUT ANY WARRANTY;
-    # # # without even the implied warranty of MERCHANTABILITY
-    # # # or FITNESS FOR A PARTICULAR PURPOSE.
-    # # # See the included license for more details.
-
-Testing Guide
-=============
-
-This testing guide has steps specific to installing and testing geoips for purposes of testing datasets
-contained within this test data repository.  This includes installing the base geoips conda environment
-if not already installed.
 
 
-Test Dataset Sources
-----------------------------------
+
+GPM Test Datasets
+==========================
+
+This repository contains test datasets for use with the Geolocated Information Processing System.
+
+Please see the 
+[GeoIPS Documentation](https://github.com/NRLMMD-GEOIPS/geoips/blob/main/README.md)
+for more information on the GeoIPS plugin architecture and base infrastructure.
+
+Sample Dataset Sources
+-----------------------
+
+This test data repository contains sample datasets from the Global Precipitation Measurement Mission
+    * GMI (GPM Microwave Imager)
+    * DPR (Dual-Frequency Precipitation Radar
+    * Please see https://www.nasa.gov/mission_pages/GPM/spacecraft/index.html for more information.
+
+Additionally contains coincident background geostationary datasets.
+
+* NOAA Geostationary Operational Environmental Satellites (GOES) 16, 17 & 18
+  was accessed on 2020-09-17 from https://registry.opendata.aws/noaa-goes.
 * GPM data obtained via https://www.earthdata.nasa.gov/eosdis
 
 
-Setup System Environment Variables
-----------------------------------
+System Requirements
+---------------------
 
-```bash
+* geoips >= 1.5.3
+* Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
 
-    # GEOIPS_BASEDIR will contain all source, output, and external dependencies
-    # Ensure this is consistently set for all installation / setup steps below
-    export GEOIPS_BASEDIR=$HOME/geoproc
 
-    # GEOIPS_REPO_URL should point to the base URL for git clone commands
-    export GEOIPS_REPO_URL=https://github.com/NRLMMD-GeoIPS
-
-    # This config file must be sourced ANY TIME you want to run geoips
-    export GEOIPS_CONFIG_FILE=$GEOIPS_BASEDIR/geoips_packages/geoips/setup/config_geoips
-
-```
-
-Obtain geoips source repo and test data repo
----------------------------------------------
-```bash
-    mkdir -p $GEOIPS_BASEDIR/geoips_packages/
-
-    git clone $GEOIPS_REPO_URL/geoips.git $GEOIPS_BASEDIR/geoips_packages/geoips
-    
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips pull
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips checkout -t origin/dev
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips checkout dev
-    git -C $GEOIPS_BASEDIR/geoips_packages/geoips pull
-
-    git clone ${GEOIPS_REPO_URL}/test_data_gpm.git ${GEOIPS_BASEDIR}/test_data/test_data_gpm
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_gpm pull
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_gpm checkout -t origin/dev
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_gpm checkout dev
-    git -C ${GEOIPS_BASEDIR}/test_data/test_data_gpm pull
-```
-
-IF REQUIRED: Install and test base geoips conda environment
+IF REQUIRED: Install base geoips package
 ------------------------------------------------------------
+SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS ENVIRONMENT 
+
+If GeoIPS Base is not yet installed, follow the
+[installation instructions](https://github.com/NRLMMD-GEOIPS/geoips/blob/main/docs/installation.rst)
+within the geoips source repo documentation.
+
+Additionally, install all GeoIPS plugins and other packages specified in "System Requirements" above
+(follow the installation instructions in their respective README files).
+
+Obtain test repo
+----------------
 ```bash
-    # SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS CONDA ENVIRONMENT 
-    # This prompts you through all the steps of installing the geoips conda environment from scratch,
-    # using the parameters specified above.  This only needs to be done once per system, skip if you
-    # already ran this step.
-    $GEOIPS_BASEDIR/geoips_packages/geoips/base_install_and_test.sh dev
+    # Assuming you followed the fully supported installation,
+    # using $GEOIPS_TESTDATA_DIR and $GEOIPS_CONFIG_FILE:
+    source $GEOIPS_CONFIG_FILE
+    git clone $GEOIPS_REPO_URL/test_data_gpm $GEOIPS_TESTDATA_DIR/test_data_gpm
 ```
 
 Run sample test scripts
 -----------------------
 ```bash
-    # Setup geoips environment variables
+    # Assuming you followed the fully supported installation,
+    # using $GEOIPS_TESTDATA_DIR, $GEOIPS_PACKAGES_DIR, and $GEOIPS_CONFIG_FILE:
     source $GEOIPS_CONFIG_FILE
 
-    # These test commands should all successfully return 0 if everything is set up properly.
+    # GeoIPS based test scripts should successfully return 0 if everything is set up properly.
     $GEOIPS/tests/scripts/gmi.tc.89pct.imagery_clean.sh
 ```
