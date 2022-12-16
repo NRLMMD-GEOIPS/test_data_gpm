@@ -3,18 +3,17 @@
     # # # Author:
     # # # Naval Research Laboratory, Marine Meteorology Division
     # # # 
-    # # # This program is free software:
-    # # # you can redistribute it and/or modify it under the terms
-    # # # of the NRLMMD License included with this program.
-    # # # 
-    # # # If you did not receive the license, see
+    # # # This program is free software: you can redistribute it and/or modify it under
+    # # # the terms of the NRLMMD License included with this program. This program is
+    # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+    # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+    # # # for more details. If you did not receive the license, for more information see:
     # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
-    # # # for more information.
-    # # # 
-    # # # This program is distributed WITHOUT ANY WARRANTY;
-    # # # without even the implied warranty of MERCHANTABILITY
-    # # # or FITNESS FOR A PARTICULAR PURPOSE.
-    # # # See the included license for more details.
+
+
+# v1.6.0: 2022-12-01, standardize README
+## GEOIPS#119: 2022-12-01, standardize README
+* Remove explicit installation steps, link to geoips
 
 
 # v1.5.1: 2022-07-14, geoips2->geoips, consolidate test outputs, update compress scripts
@@ -39,7 +38,7 @@
 * Adding goes16 background data files for tc2020al20teddy gmi test case
 
 
-# v1.3.0: 2021-11-25, atcf->tc, remove satops
+# v1.3.0: 2021-11-25, atcf->tc, update output path
 
 ### Breaking Test Repo Updates
     * Update TC YAML metadata outputs
