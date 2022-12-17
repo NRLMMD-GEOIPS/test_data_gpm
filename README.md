@@ -41,6 +41,7 @@ System Requirements
 
 * geoips >= 1.5.3
 * Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
+    * git lfs  # If using git to clone test repos
 
 
 IF REQUIRED: Install base geoips package
